@@ -1,4 +1,4 @@
-# Write a Python Script that captures images from your webcam video stream
+# Writing a Python Script that captures images from your webcam video stream
 # Extracts all Faces from the image frame (using haarcascades)
 # Stores the Face information into numpy arrays
 
@@ -19,7 +19,7 @@ face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_alt.xml")
 
 skip = 0
 face_data = []
-dataset_path = './data/'
+dataset_path = './data/'#you can use the path where you what your face data to be stored
 file_name = input("Enter the name of the person : ")
 while True:
 	ret,frame = cap.read()
