@@ -91,8 +91,11 @@ while True:
     ret, frame = cap.read()
     if ret == False:
         continue
+        
+    gray_frame = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+                              
 
-    faces = face_cascade.detectMultiScale(frame, 1.3, 5)
+    faces = face_cascade.detectMultiScale(gray_frame, 1.3, 5)
     if (len(faces) == 0):
         continue
 
@@ -101,7 +104,7 @@ while True:
 
         # Get the face ROI
         offset = 10
-        face_section = frame[y - offset:y + h + offset, x - offset:x + w + offset]
+        face_section = gray_frame[y - offset:y + h + offset, x - offset:x + w + offset]
         face_section = cv2.resize(face_section, (100, 100))
 
         # Predicted Label (out)
