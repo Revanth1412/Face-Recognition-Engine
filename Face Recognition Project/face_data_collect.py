@@ -27,7 +27,7 @@ while True:
 	if ret==False:
 		continue
 
-	gray_frame = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+	gray_frame = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)# you can use a gray frame if you want to minimize the data size
 	
 
 	faces = face_cascade.detectMultiScale(frame,1.3,5)
