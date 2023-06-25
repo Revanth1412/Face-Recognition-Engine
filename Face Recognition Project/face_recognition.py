@@ -1,4 +1,4 @@
-# Recognise Faces using some classification algorithm - like Logistic, KNN, SVM etc.
+# Recognise Faces using some classification algorithm - like Logistic, KNN, SVM etc. Here we are using KNN.
 
 
 # 1. load the training data (numpy arrays of all the persons)
@@ -21,7 +21,7 @@ def distance(v1, v2):
     return np.sqrt(((v1 - v2) ** 2).sum())
 
 
-def knn(train, test, k=5):
+def knn(train, test, k=10):
     dist = []
 
     for i in range(train.shape[0]):
@@ -51,7 +51,7 @@ def knn(train, test, k=5):
 cap = cv2.VideoCapture(0)
 
 # Face Detection
-face_cascade = cv2.CascadeClassifier("haircare_frontage_alt.xml")
+face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_alt.xml")
 
 skip = 0
 dataset_path = './data/'
@@ -91,10 +91,7 @@ while True:
     ret, frame = cap.read()
     if ret == False:
         continue
-        
     gray_frame = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
-                              
-
     faces = face_cascade.detectMultiScale(gray_frame, 1.3, 5)
     if (len(faces) == 0):
         continue
@@ -112,10 +109,10 @@ while True:
 
         # Display on the screen the name and rectangle around it
         pred_name = names[int(out)]
-        cv2.putText(frame, pred_name, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
-        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 255), 2)
+        cv2.putText(gray_frame, pred_name, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
+        cv2.rectangle(gray_frame, (x, y), (x + w, y + h), (0, 255, 255), 2)
 
-    cv2.imshow("Faces", frame)
+    cv2.imshow("Faces", gray_frame)
 
     key = cv2.waitKey(1) & 0xFF
     if key == ord('q'):
